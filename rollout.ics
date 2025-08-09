@@ -23,6 +23,6 @@ DTSTAMP:20240809T120000Z
 DTSTART;TZID=Europe/Lisbon:20250925T163000
 DTEND;TZID=Europe/Lisbon:20250925T200000
 SUMMARY:Rollout TLM05e
-LOCATION:Salão Nobre, Pavilhão Central, Instituto Superior Técnico
+LOCATION:Salão Nobre\, Pavilhão Central\, Instituto Superior Técnico
 END:VEVENT
 END:VCALENDAR
