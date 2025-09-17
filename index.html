@@ -50,56 +50,71 @@
   </style>
 </head>
 <body>
+  <!-- Step 1 -->
   <div class="card" id="step1">
     <h1>Vai estar presente no Rollout TLM05e?</h1>
-    <button class="btn yes" onclick="attendingYes()">Sim</button>
-    <button class="btn no" onclick="attendingNo()">Não</button>
+    <button class="btn yes" id="yesBtn">Sim</button>
+    <button class="btn no" id="noBtn">Não</button>
   </div>
 
+  <!-- Step 2 -->
   <div class="card hidden" id="step2">
     <h1>Confirme a sua presença</h1>
-    <input type="text" id="name" placeholder="O seu nome" required />
-    <input type="text" id="role" placeholder="Função (ex: estudante, sponsor...)" required />
-    <button class="btn yes" onclick="submitYes()">Confirmar</button>
+    <input type="text" id="name" placeholder="O seu nome" />
+    <input type="text" id="role" placeholder="Função (ex: estudante, sponsor...)" />
+    <button class="btn yes" id="confirmBtn">Confirmar</button>
   </div>
 
+  <!-- Step 3 -->
   <div class="card hidden" id="step3">
     <h1>Obrigado pela sua resposta 🙏</h1>
     <p>Será redirecionado...</p>
   </div>
 
   <script>
-    function attendingYes() {
-      document.getElementById("step1").classList.add("hidden");
-      document.getElementById("step2").classList.remove("hidden");
-    }
+    // Get elements
+    const step1 = document.getElementById("step1");
+    const step2 = document.getElementById("step2");
+    const step3 = document.getElementById("step3");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const confirmBtn = document.getElementById("confirmBtn");
 
-    function attendingNo() {
-      document.getElementById("step1").classList.add("hidden");
-      document.getElementById("step3").classList.remove("hidden");
+    // If Yes
+    yesBtn.addEventListener("click", () => {
+      step1.classList.add("hidden");
+      step2.classList.remove("hidden");
+    });
+
+    // If No
+    noBtn.addEventListener("click", () => {
+      step1.classList.add("hidden");
+      step3.classList.remove("hidden");
       setTimeout(() => {
         window.location.href = "https://tlmoto.tecnico.ulisboa.pt";
       }, 2000);
-    }
+    });
 
-    function submitYes() {
+    // Confirm attendance
+    confirmBtn.addEventListener("click", () => {
       const name = document.getElementById("name").value.trim();
       const role = document.getElementById("role").value.trim();
+
       if (!name || !role) {
         alert("Por favor, preencha todos os campos.");
         return;
       }
 
-      // 👉 Aqui pode adicionar lógica para guardar as respostas (ex: Google Sheets, API, Airtable, etc.)
+      // For now just log it (you can later send it to Google Sheets / Airtable)
       console.log("Nome:", name, "Função:", role);
 
-      document.getElementById("step2").classList.add("hidden");
-      document.getElementById("step3").classList.remove("hidden");
+      step2.classList.add("hidden");
+      step3.classList.remove("hidden");
 
       setTimeout(() => {
-        window.location.href = "rollout.html"; // página final que já tens
+        window.location.href = "rollout.html"; // <- your event page
       }, 2000);
-    }
+    });
   </script>
 </body>
 </html>
