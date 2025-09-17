@@ -3,137 +3,103 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rollout TLM05e</title>
-  <!-- Font Awesome CDN for icons -->
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    rel="stylesheet"
-  />
+  <title>Confirmação de Presença</title>
   <style>
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 30px;
-      gap: 18px;
+      justify-content: center;
       min-height: 100vh;
       background: #f7f7fb;
-      color: #111;
+      margin: 0;
     }
     .card {
       background: white;
-      padding: 22px;
+      padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-      max-width: 680px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      max-width: 420px;
       width: 100%;
       text-align: center;
-      position: relative;
     }
     h1 {
-      margin: 0 0 12px 0; /* espaçamento moderado abaixo do título */
-      font-size: 20px;
-    }
-    p.small {
-      margin: 0 0 8px 0; /* espaçamento mais suave entre parágrafos */
-      color: #555;
-      line-height: 1.4; /* ligeiro aumento do espaçamento entre linhas */
-    }
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 12px;
+      margin-bottom: 20px;
+      font-size: 22px;
     }
     .btn {
-      padding: 10px 14px;
+      padding: 10px 18px;
+      margin: 8px;
+      border: none;
       border-radius: 8px;
-      text-decoration: none;
-      color: white;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
       font-size: 16px;
-      line-height: 1;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
     }
-    .btn .icon {
-      font-size: 20px;
-      line-height: 1;
-      user-select: none;
-      display: inline-block;
-      vertical-align: middle;
-      flex-shrink: 0;
+    .yes { background: #28a745; }
+    .no { background: #dc3545; }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
-    .google {
-      background: #db4437;
-    }
-    .outlook {
-      background: #0078d4;
-    }
-    .card img.logo {
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      width: 75px; /* 50% bigger than 50px */
-      height: auto;
-      user-select: none;
-      pointer-events: none;
-    }
-    .below-image {
-      max-width: 680px;
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-      margin-top: 10px;
-    }
-    p.add-event {
-      margin-top: 16px; /* um pouco mais de espaço acima do "Adicionar evento" */
-      color: #444;
-    }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img
-      class="logo"
-      src="https://i.imgur.com/HEBnxxS.png"
-      alt="Logo TLMoto"
-    />
-    <h1>Rollout TLM05e</h1>
-    <p class="small">📅 <strong>25 de Setembro de 2025</strong> — 16:30 – 20:00</p>
-    <p class="small">
-      📍 Salão Nobre, Pavilhão Central, Instituto Superior Técnico
-    </p>
-    <p class="add-event">Adicionar evento:</p>
-    <div class="links">
-            <a
-        class="btn google"
-        target="_blank"
-        rel="noopener"
-        href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Rollout%20TLM05e&dates=20250925T153000Z/20250925T190000Z&location=Sal%C3%A3o%20Nobre%2C%20Pavilh%C3%A3o%20Central%2C%20Instituto%20Superior%20T%C3%A9cnico"
-        ><i class="fab fa-google"></i>Google Calendar</a
-      >
-          <a
-      class="btn outlook"
-      target="_blank"
-      rel="noopener"
-      href="https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=Rollout%20TLM05e&startdt=2025-09-25T15%3A30%3A00Z&enddt=2025-09-25T19%3A00%3A00Z&location=Sal%C3%A3o%20Nobre%2C%20Pavilh%C3%A3o%20Central%2C%20Instituto%20Superior%20T%C3%A9cnico"
-      ><i class="fab fa-microsoft"></i>Outlook</a
-    >
-
-    </div>
+  <div class="card" id="step1">
+    <h1>Vai estar presente no Rollout TLM05e?</h1>
+    <button class="btn yes" onclick="attendingYes()">Sim</button>
+    <button class="btn no" onclick="attendingNo()">Não</button>
   </div>
-  <img
-    class="below-image"
-    src="https://i.imgur.com/nc9QWA8.jpeg"
-    alt="TLMoto Image"
-  />
-  <footer>
-   Para outros calendários, <a href="rollout.ics" download>adicione</a>.
-   </footer>
+
+  <div class="card hidden" id="step2">
+    <h1>Confirme a sua presença</h1>
+    <input type="text" id="name" placeholder="O seu nome" required />
+    <input type="text" id="role" placeholder="Função (ex: estudante, sponsor...)" required />
+    <button class="btn yes" onclick="submitYes()">Confirmar</button>
+  </div>
+
+  <div class="card hidden" id="step3">
+    <h1>Obrigado pela sua resposta 🙏</h1>
+    <p>Será redirecionado...</p>
+  </div>
+
+  <script>
+    function attendingYes() {
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step2").classList.remove("hidden");
+    }
+
+    function attendingNo() {
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step3").classList.remove("hidden");
+      setTimeout(() => {
+        window.location.href = "https://tlmoto.tecnico.ulisboa.pt";
+      }, 2000);
+    }
+
+    function submitYes() {
+      const name = document.getElementById("name").value.trim();
+      const role = document.getElementById("role").value.trim();
+      if (!name || !role) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+      }
+
+      // 👉 Aqui pode adicionar lógica para guardar as respostas (ex: Google Sheets, API, Airtable, etc.)
+      console.log("Nome:", name, "Função:", role);
+
+      document.getElementById("step2").classList.add("hidden");
+      document.getElementById("step3").classList.remove("hidden");
+
+      setTimeout(() => {
+        window.location.href = "rollout.html"; // página final que já tens
+      }, 2000);
+    }
+  </script>
 </body>
 </html>
