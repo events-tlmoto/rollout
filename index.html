@@ -1,169 +1,67 @@
-<!doctype html>
-<html lang="pt-PT">
+<!DOCTYPE html>
+<html lang="pt">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Rollout TLM05e</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-<style>
-body { font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:30px; gap:18px; min-height:100vh; background:#f7f7fb; color:#111; position:relative;}
-.hidden { display:none; }
-.logo-fixed { position:fixed; top:12px; right:12px; width:75px; height:auto; user-select:none; pointer-events:none; }
-.rsvp-card, .form-card { background:white; padding:22px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.06); max-width:480px; width:100%; text-align:center; position:relative;}
-.rsvp-card h2, .form-card h2 { margin:0 0 16px 0;}
-.rsvp-buttons { display:flex; justify-content:center; gap:12px; flex-wrap:wrap;}
-.rsvp-buttons button, .form-card button { padding:10px 16px; border:none; border-radius:8px; font-weight:600; cursor:pointer;}
-.yes-btn { background:#0078d4; color:white; }
-.no-btn { background:#db4437; color:white; }
-input, select { width:90%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc; }
-.card { background:white; padding:22px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.06); max-width:680px; width:100%; text-align:center; position:relative; }
-h1 { margin:0 0 12px 0; font-size:20px;}
-p.small { margin:0 0 8px 0; color:#555; line-height:1.4;}
-.links { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px;}
-.btn { padding:10px 14px; border-radius:8px; text-decoration:none; color:white; font-weight:600; display:inline-flex; align-items:center; gap:8px; font-size:16px; line-height:1;}
-.google { background:#db4437; }
-.outlook { background:#0078d4; }
-p.add-event { margin-top:16px; color:#444; }
-.below-image { max-width:680px; width:100%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.06); margin-top:10px;}
-.back-arrow { position:absolute; top:12px; left:12px; font-size:22px; color:#0078d4; cursor:pointer; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rollout TLM05e</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/aa9e25b5b0.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
-<img class="logo-fixed" src="https://i.imgur.com/HEBnxxS.png" alt="Logo TLMoto" />
-
-<!-- Step 1: RSVP -->
-<div id="rsvp" class="rsvp-card">
-  <h2>Vai estar presente no Rollout da TLM05e?</h2>
-  <div class="rsvp-buttons">
-    <button class="yes-btn" onclick="showType()">Sim</button>
-    <button class="no-btn" onclick="submitNo()">Não</button>
-  </div>
-</div>
-
-<!-- Step 2: Type of participant -->
-<div id="type" class="form-card hidden">
-  <i class="fa-solid fa-arrow-left back-arrow" onclick="goBack('type','rsvp')"></i>
-  <h2>Sou:</h2>
-  <div class="rsvp-buttons">
-    <button class="yes-btn" onclick="showCompanyForm()">Uma empresa</button>
-    <button class="no-btn" onclick="showFinalForm('member')">Outro</button>
-  </div>
-</div>
-
-<!-- Step 3: Company form -->
-<div id="company" class="form-card hidden">
-  <i class="fa-solid fa-arrow-left back-arrow" onclick="goBack('company','type')"></i>
-  <h2>Quantas pessoas estarão presentes?</h2>
-  <select id="numPeople" onchange="renderPeopleFields()">
-    <option value="">Selecione</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
-  <div id="peopleFields"></div>
-  <input type="text" id="matricula" placeholder="Matrícula" />
-  <p style="font-size: 0.85em; color: #555; margin-top: 4px;">
-    Matrículas de veículos que necessitarem de estacionamento.
-  </p>
-  <button class="yes-btn" onclick="submitCompany()">Confirmar</button>
-</div>
-
-<!-- Step 4: Rollout page -->
-<div id="rollout" class="hidden">
-  <div class="card">
-    <h1>Rollout TLM05e</h1>
-    <p class="small">📅 <strong>25 de Setembro de 2025</strong> — 16:30 – 20:00</p>
-    <p class="small">📍 Salão Nobre, Pavilhão Central, Instituto Superior Técnico</p>
-    <p class="add-event">Adicionar evento:</p>
-    <div class="links">
-      <a class="btn google" target="_blank" rel="noopener"
-         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Rollout%20TLM05e&dates=20250925T153000Z/20250925T190000Z&location=Sal%C3%A3o%20Nobre%2C%20Pavilh%C3%A3o%20Central%2C%20Instituto%20Superior%20T%C3%A9cnico">
-        <i class="fab fa-google"></i>Google Calendar
-      </a>
-      <a class="btn outlook" target="_blank" rel="noopener"
-         href="https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=Rollout%20TLM05e&startdt=2025-09-25T15%3A30%3A00Z&enddt=2025-09-25T19%3A00%3A00Z&location=Sal%C3%A3o%20Nobre%2C%20Pavilh%C3%A3o%20Central%2C%20Instituto%20Superior%20T%C3%A9cnico">
-        <i class="fab fa-microsoft"></i>Outlook
-      </a>
+  <!-- Step 1: Landing page -->
+  <div id="landing" class="page">
+    <div class="card">
+      <img src="https://i.imgur.com/HEBnxxS.png" alt="TLMoto Logo" class="logo" />
+      <h1>Rollout TLM05e</h1>
+      <p>25 de Setembro de 2025<br />16:30 – 20:00<br />Salão Nobre, Instituto Superior Técnico</p>
+      <button onclick="showForm()">RSVP</button>
     </div>
   </div>
-  <footer>Para outros calendários, <a href="rollout.ics" download>adicione</a>.</footer>
-</div>
 
-<!-- Persistent rollout invite image -->
-<img class="below-image" src="https://i.imgur.com/nc9QWA8.jpeg" alt="TLMoto Image" />
+  <!-- Step 2: RSVP form -->
+  <div id="form" class="hidden">
+    <div class="card">
+      <h2>Confirma a tua presença</h2>
+      <form id="rsvpForm">
+        <input type="text" id="name" placeholder="Nome" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <button type="submit">Confirmar</button>
+      </form>
+    </div>
+  </div>
 
-<script>
-const recordId = new URLSearchParams(window.location.search).get('record');
-const webhookUrl = "https://hook.eu2.make.com/m86th1bc3jmbwvt45cpuet3ts9w9jwrs";
+  <!-- Step 3: Thank you page -->
+  <div id="thankyou" class="hidden">
+    <div class="card">
+      <h2>Obrigado!</h2>
+      <p>Receberás um email de confirmação em breve.</p>
+    </div>
+  </div>
 
-function showType(){
-  document.getElementById('rsvp').classList.add('hidden');
-  document.getElementById('type').classList.remove('hidden');
-}
+  <!-- Step 4: Rollout page -->
+  <div id="rollout" class="hidden">
+    <div class="card">
+      <h1>Rollout TLM05e</h1>
+      <p class="small">📅 <strong>25 de Setembro de 2025</strong> — 16:30 – 20:00</p>
+      <p class="small">📍 Salão Nobre, Pavilhão Central, Instituto Superior Técnico</p>
+      <p class="add-event">Adicionar evento:</p>
+      <div class="links">
+        <a class="btn google" target="_blank" rel="noopener"
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Rollout%20TLM05e&dates=20250925T153000Z/20250925T190000Z&location=Sal%C3%A3o%20Nobre%2C%20Pavilh%C3%A3o%20Central%2C%20Instituto%20Superior%20T%C3%A9cnico">
+          <i class="fab fa-google"></i>Google Calendar
+        </a>
+        <a class="btn outlook" target="_blank" rel="noopener"
+          href="https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=Rollout%20TLM05e&startdt=2025-09-25T15%3A30%3A00Z&enddt=2025-09-25T19%3A00%3A00Z&location=Sal%C3%A3o%20Nobre%2C%20Pavilh%C3%A3o%20Central%2C%20Instituto%20Superior%20T%C3%A9cnico">
+          <i class="fab fa-microsoft"></i>Outlook
+        </a>
+      </div>
+    </div>
+    <!-- Updated: invite image now hosted on your custom domain -->
+    <img class="below-image" src="https://events.tlmoto.tecnico.ulisboa.pt/Convite%20Rollout.jpg" alt="Convite Rollout" />
+    <footer>Para outros calendários, <a href="rollout.ics" download>adicione</a>.</footer>
+  </div>
 
-function showCompanyForm(){
-  document.getElementById('type').classList.add('hidden');
-  document.getElementById('company').classList.remove('hidden');
-}
-
-function renderPeopleFields(){
-  const num = parseInt(document.getElementById('numPeople').value);
-  const container = document.getElementById('peopleFields');
-  container.innerHTML = '';
-  for(let i=1;i<=num;i++){
-    container.innerHTML += `<input type="text" id="person${i}Name" placeholder="Nome pessoa ${i}" />
-                            <input type="text" id="person${i}Role" placeholder="Função pessoa ${i}" />`;
-  }
-}
-
-async function submitCompany(){
-  const num = parseInt(document.getElementById('numPeople').value);
-  if(!num) { alert("Escolha o número de pessoas."); return; }
-  const matricula = document.getElementById('matricula').value.trim();
-  if(!matricula){ alert("Preencha a matrícula."); return; }
-  const people=[];
-  for(let i=1;i<=num;i++){
-    const name=document.getElementById(`person${i}Name`).value.trim();
-    const role=document.getElementById(`person${i}Role`).value.trim();
-    if(!name || !role){ alert(`Preencha nome e função da pessoa ${i}`); return;}
-    people.push({name, role});
-  }
-  await fetch(webhookUrl,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({recordId, going:"Yes", type:"empresa", matricula, people})
-  });
-  document.getElementById('company').classList.add('hidden');
-  document.getElementById('rollout').classList.remove('hidden');
-}
-
-async function showFinalForm(type){
-  await fetch(webhookUrl,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({recordId, going:"Yes", type:"member"})
-  });
-  document.getElementById('type').classList.add('hidden');
-  document.getElementById('rollout').classList.remove('hidden');
-}
-
-async function submitNo(){
-  await fetch(webhookUrl,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({recordId, going:"No"})
-  });
-  window.location.href="https://tlmoto.tecnico.ulisboa.pt";
-}
-
-function goBack(current, previous){
-  document.getElementById(current).classList.add('hidden');
-  document.getElementById(previous).classList.remove('hidden');
-}
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
+
