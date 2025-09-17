@@ -4,8 +4,113 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rollout TLM05e</title>
-  <link rel="stylesheet" href="style.css" />
   <script src="https://kit.fontawesome.com/aa9e25b5b0.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px;
+      gap: 18px;
+      min-height: 100vh;
+      background: #f7f7fb;
+      color: #111;
+      position: relative;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .logo {
+      max-width: 100px;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 22px;
+    }
+
+    p.small {
+      margin: 0 0 8px 0;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #0078d4;
+      color: white;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .btn {
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .google {
+      background: #db4437;
+    }
+
+    .outlook {
+      background: #0078d4;
+    }
+
+    p.add-event {
+      margin-top: 16px;
+      color: #444;
+    }
+
+    .below-image {
+      max-width: 680px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <!-- Step 1: Landing page -->
