@@ -9,9 +9,9 @@
 body { font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:30px; gap:18px; min-height:100vh; background:#f7f7fb; color:#111; position:relative;}
 .hidden { display:none; }
 .logo-fixed { position:fixed; top:12px; right:12px; width:75px; height:auto; user-select:none; pointer-events:none; }
-.rsvp-card, .form-card { background:white; padding:22px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.06); max-width:480px; width:100%; text-align:center;}
+.rsvp-card, .form-card { background:white; padding:22px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.06); max-width:480px; width:100%; text-align:center; position:relative;}
 .rsvp-card h2, .form-card h2 { margin:0 0 16px 0;}
-.rsvp-buttons { display:flex; justify-content:center; gap:12px;}
+.rsvp-buttons { display:flex; justify-content:center; gap:12px; flex-wrap:wrap;}
 .rsvp-buttons button, .form-card button { padding:10px 16px; border:none; border-radius:8px; font-weight:600; cursor:pointer;}
 .yes-btn { background:#0078d4; color:white; }
 .no-btn { background:#db4437; color:white; }
@@ -25,6 +25,7 @@ p.small { margin:0 0 8px 0; color:#555; line-height:1.4;}
 .outlook { background:#0078d4; }
 p.add-event { margin-top:16px; color:#444; }
 .below-image { max-width:680px; width:100%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.06); margin-top:10px;}
+.back-arrow { position:absolute; top:12px; left:12px; font-size:22px; color:#0078d4; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -42,6 +43,7 @@ p.add-event { margin-top:16px; color:#444; }
 
 <!-- Step 2: Type of participant -->
 <div id="type" class="form-card hidden">
+  <i class="fa-solid fa-arrow-left back-arrow" onclick="goBack('type','rsvp')"></i>
   <h2>Sou:</h2>
   <div class="rsvp-buttons">
     <button class="yes-btn" onclick="showCompanyForm()">Uma empresa</button>
@@ -51,6 +53,7 @@ p.add-event { margin-top:16px; color:#444; }
 
 <!-- Step 3: Company form -->
 <div id="company" class="form-card hidden">
+  <i class="fa-solid fa-arrow-left back-arrow" onclick="goBack('company','type')"></i>
   <h2>Quantas pessoas estarão presentes?</h2>
   <select id="numPeople" onchange="renderPeopleFields()">
     <option value="">Selecione</option>
@@ -61,10 +64,10 @@ p.add-event { margin-top:16px; color:#444; }
     <option value="5">5</option>
   </select>
   <div id="peopleFields"></div>
-<input type="text" id="matricula" placeholder="Matrícula" />
-<p style="font-size: 0.85em; color: #555; margin-top: 4px;">
-  Matrículas de veículos que necessitarem de estacionamento.
-</p>
+  <input type="text" id="matricula" placeholder="Matrícula" />
+  <p style="font-size: 0.85em; color: #555; margin-top: 4px;">
+    Matrículas de veículos que necessitarem de estacionamento.
+  </p>
   <button class="yes-btn" onclick="submitCompany()">Confirmar</button>
 </div>
 
@@ -86,9 +89,11 @@ p.add-event { margin-top:16px; color:#444; }
       </a>
     </div>
   </div>
-  <img class="below-image" src="https://i.imgur.com/nc9QWA8.jpeg" alt="TLMoto Image" />
   <footer>Para outros calendários, <a href="rollout.ics" download>adicione</a>.</footer>
 </div>
+
+<!-- Persistent rollout invite image -->
+<img class="below-image" src="https://i.imgur.com/nc9QWA8.jpeg" alt="TLMoto Image" />
 
 <script>
 const recordId = new URLSearchParams(window.location.search).get('record');
@@ -152,6 +157,11 @@ async function submitNo(){
     body: JSON.stringify({recordId, going:"No"})
   });
   window.location.href="https://tlmoto.tecnico.ulisboa.pt";
+}
+
+function goBack(current, previous){
+  document.getElementById(current).classList.add('hidden');
+  document.getElementById(previous).classList.remove('hidden');
 }
 </script>
 
