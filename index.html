@@ -123,7 +123,6 @@ async function submitCompany(){
   const num = parseInt(document.getElementById('numPeople').value);
   if(!num) { alert("Escolha o número de pessoas."); return; }
   const matricula = document.getElementById('matricula').value.trim();
-  if(!matricula){ alert("Preencha a matrícula."); return; }
   const people=[];
   for(let i=1;i<=num;i++){
     const name=document.getElementById(`person${i}Name`).value.trim();
